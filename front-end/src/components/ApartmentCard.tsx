@@ -17,7 +17,9 @@ export default function ApartmentCard({ apartment }: ApartmentCardProps) {
           />
         </div>
         <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">{apartment.unitName}</h2>
+          <h2 className="text-black text-xl font-semibold mb-2">
+            {apartment.unitName}
+          </h2>
           <p className="text-gray-600 mb-2">{apartment.project}</p>
           <p className="text-gray-800 font-bold">
             ${apartment.price.toLocaleString()}
