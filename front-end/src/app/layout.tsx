@@ -2,6 +2,7 @@
 import "./globals.css"; // optional, if you use global CSS
 import { ReactNode } from "react";
 import Link from "next/link";
+import SearchBar from "@/components/SearchBar";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <Link href="/" className="text-xl font-bold text-gray-900">
                   Apartment Listings
                 </Link>
+                <SearchBar />
                 <Link
                   href="/apartments/new"
                   className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors"
