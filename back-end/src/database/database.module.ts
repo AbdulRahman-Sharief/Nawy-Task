@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ApartmentSchema } from 'src/apartments/entities/apartment.entity';
 
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot(),
