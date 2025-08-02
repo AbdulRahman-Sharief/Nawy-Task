@@ -20,8 +20,11 @@ export class ApartmentsService {
     return created.save();
   }
 
-  async findAll() {
-    return this.apartmentModel.find().exec();
+  async findAll(search?: string) {
+    if (search) {
+      return this.apartmentModel.find({ $text: { $search: search } });
+    }
+    return this.apartmentModel.find();
   }
 
   async findOne(id: string) {

@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Patch,
+  Query,
 } from '@nestjs/common';
 
 import { ApartmentsService } from './apartments.service';
@@ -14,7 +15,7 @@ import { ApiOperation, ApiParam, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('apartments')
 export class ApartmentsController {
-  constructor(private readonly service: ApartmentsService) {}
+  constructor(private readonly apartmentService: ApartmentsService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new apartment' })
@@ -22,7 +23,7 @@ export class ApartmentsController {
   @ApiResponse({ status: 400, description: 'Invalid input' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   create(@Body() dto: CreateApartmentDto) {
-    return this.service.create(dto);
+    return this.apartmentService.create(dto);
   }
 
   @Get()
@@ -30,10 +31,9 @@ export class ApartmentsController {
   @ApiQuery({ name: 'search', required: false })
   @ApiResponse({ status: 200, description: 'Successful response' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
-  findAll() {
-    return this.service.findAll();
+  findAll(@Query('search') search?: string) {
+    return this.apartmentService.findAll(search);
   }
-
   @Get(':id')
   @ApiOperation({ summary: 'Get apartment by ID' })
   @ApiParam({ name: 'id', required: true })
@@ -41,6 +41,6 @@ export class ApartmentsController {
   @ApiResponse({ status: 404, description: 'Apartment not found' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   findOne(@Param('id') id: string) {
-    return this.service.findOne(id);
+    return this.apartmentService.findOne(id);
   }
 }
