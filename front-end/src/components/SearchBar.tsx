@@ -20,7 +20,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex-1 max-w-1/2">
+    <form onSubmit={handleSearch} className="hidden md:flex-1 max-w-1/2">
       <div className="flex gap-2">
         <input
           type="text"

@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ApartmentCard from "../components/ApartmentCard";
 import { Apartment } from "../types/apartment";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-export default function HomePage() {
+// Extracted component using search params
+function ApartmentsWithSearch() {
   const [apartments, setApartments] = useState<Apartment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,14 +28,7 @@ export default function HomePage() {
           ? `${API_URL}/api/v1/apartments?search=${encodeURIComponent(search)}`
           : `${API_URL}/api/v1/apartments`;
 
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-
+        const response = await fetch(url);
         if (!response.ok) {
           const errorText = await response.text();
           throw new Error(
@@ -63,7 +57,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
       <div className="mb-6">
         <input
           type="text"
@@ -99,6 +93,17 @@ export default function HomePage() {
           )}
         </div>
       )}
+    </>
+  );
+}
+
+// This is your actual page component
+export default function HomePage() {
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <Suspense fallback={<p>Loading apartments...</p>}>
+        <ApartmentsWithSearch />
+      </Suspense>
     </div>
   );
 }

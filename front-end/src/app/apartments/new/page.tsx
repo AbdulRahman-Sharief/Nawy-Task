@@ -33,17 +33,16 @@ export default function NewApartment() {
         area: Number(formData.area),
         images: formData.images.filter(Boolean),
       };
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/apartments`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formattedData),
-        }
-      );
+      const API_URL =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+      console.log(process.env.NEXT_PUBLIC_API_URL);
+      const response = await fetch(`${API_URL}/api/v1/apartments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formattedData),
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
