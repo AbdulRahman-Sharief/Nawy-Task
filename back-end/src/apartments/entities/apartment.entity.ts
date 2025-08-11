@@ -16,7 +16,7 @@ export class ApartmentEntity {
   @Prop({ required: true })
   project: string;
   @ApiProperty({ description: 'Price in USD', example: 150000 })
-  @Prop({ required: true })
+  @Prop({ type: Number, required: true })
   price: number;
   @ApiProperty({ description: 'Number of bedrooms', example: 3 })
   @Prop({ required: true })
