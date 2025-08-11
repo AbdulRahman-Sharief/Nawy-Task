@@ -62,7 +62,7 @@ function ApartmentsWithSearch() {
         <input
           type="text"
           placeholder="Search by unit name, number, or project..."
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder-black"
           defaultValue={search}
           onChange={(e) => handleSearch(e.target.value)}
         />
